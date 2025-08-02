@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>I Love You ❤️</title>
+  <link rel="stylesheet" href="style2.css" />
+</head>
+<body>
+  <div class="hearts">
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+  </div>
+
+  <div class="container">
+    <h1 id="typing-text"></h1>
+    <button onclick="showMessage()">Send Love 💖</button>
+    <p id="love-message" class="hidden">
+      Kmean Tgaii dea b tv jorl o te. I love you forever Mai Dalin! ❤️
+    </p>
+
+    <button id="music-btn">🔈 Play Music</button>
+    <audio id="bg-music" loop>
+      <source src="assets/bg-music.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <script>
+    const text = "I Love You ❤️";
+    const typingElement = document.getElementById("typing-text");
+    let i = 0;
+
+    function type() {
+      if (i < text.length) {
+        typingElement.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 150);
+      }
+    }
+    type();
+
+    function showMessage() {
+      document.getElementById("love-message").classList.remove("hidden");
+    }
+
+    const musicBtn = document.getElementById('music-btn');
+    const bgMusic = document.getElementById('bg-music');
+    let isPlaying = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.textContent = '🔈 Play Music';
+      } else {
+        bgMusic.play();
+        musicBtn.textContent = '🔊 Pause Music';
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+</body>
+</html>
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  height: 100vh;
+  background: linear-gradient(-45deg, #ff6699, #ffcc66, #66ccff, #cc99ff);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container {
+  z-index: 10;
+  max-width: 90vw;
+}
+
+h1 {
+  font-size: 4vw;
+  color: white;
+  text-shadow: 0 0 15px #ff0066, 0 0 25px #ff6699;
+  margin-bottom: 20px;
+  min-height: 3em;
+}
+
+button {
+  font-size: 1.5vw;
+  background-color: #ff3366;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ff6699;
+  transition: transform 0.3s ease;
+  margin: 10px 5px 0 5px;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#love-message {
+  color: white;
+  font-size: 2vw;
+  margin-top: 25px;
+  animation: fadeIn 1.5s ease forwards;
+  opacity: 0;
+}
+
+#love-message.hidden {
+  display: none;
+  opacity: 0;
+}
+
+#love-message:not(.hidden) {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hearts animation */
+
+.hearts {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  transform: rotate(45deg);
+  animation: floatHeart 6s linear infinite;
+  opacity: 0.7;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+}
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+.heart:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+}
+.heart:nth-child(2) {
+  left: 40%;
+  animation-delay: 2s;
+}
+.heart:nth-child(3) {
+  left: 70%;
+  animation-delay: 4s;
+}
+.heart:nth-child(4) {
+  left: 85%;
+  animation-delay: 1s;
+}
+.heart:nth-child(5) {
+  left: 25%;
+  animation-delay: 3s;
+}
+
+@keyframes floatHeart {
+  0% {
+    bottom: -10%;
+    transform: scale(1) rotate(45deg);
+  }
+  50% {
+    transform: scale(1.5) rotate(45deg);
+  }
+  100% {
+    bottom: 110%;
+    transform: scale(1) rotate(45deg);
+  }
+}
+
+/* Responsive text and button */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 12vw;
+    min-height: auto;
+  }
+  button {
+    font-size: 5vw;
+    padding: 15px 30px;
+  }
+  #love-message {
+    font-size: 6vw;
+  }
+}
